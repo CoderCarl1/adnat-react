@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LogIn from './components/LogIn';
 import PasswordReset from './components/PasswordReset';
 import SignUp from './components/SignUp';
-import UserDashboard from './components/UserDashboard';
+import JoinOrgansations from './components/JoinOrgansations';
 import './App.css';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" component={LogIn} exact />
           <Route path="/password-reset" component={PasswordReset} exact />
           <Route path="/sign-up" component={SignUp} exact />
-          <Route path="/user-dashboard" component={UserDashboard} exact />
+          <Route path="/join-organisations" component={JoinOrgansations} exact />
       </div>
     </Router>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const UserDashboard = () => (
+const JoinOrgansations = () => (
     <>
         <p>Logged in as NAME <Link to="/">Log Out</Link></p> 
 
@@ -36,4 +36,4 @@ const UserDashboard = () => (
     </>
 );
 
-export default UserDashboard;
+export default JoinOrgansations;
