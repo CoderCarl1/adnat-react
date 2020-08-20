@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import NavBar from "./NavBar";
 
 // When new member signs up they're redirected to this screen and prompted to join organisations
 const ViewOrganisation = () => (
     <>
-        <p>Logged in as NAME <Link to="/">Log Out</Link></p> 
+        <NavBar/>
 
         <p>You aren't a member of any organisations.</p>
         <p>Join an existing one or create a new one.</p>

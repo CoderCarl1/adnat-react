@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import NavBar from "./NavBar";
 
 // This is used to edit an organisation's name and hourly update
 const EditOrganisation = () => (
     <>
-        <p>Logged in as NAME <Link to="/">Log Out</Link></p> 
+        <NavBar/> 
 
         <h2>Edit Organisation</h2>
 

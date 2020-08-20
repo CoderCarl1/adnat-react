@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import NavBar from "./NavBar";
 
 // Once a user has joined an organisation they're redirected to this screen
 const JoinOrganisation = () => (
     <>
-        <p>Logged in as NAME <Link to="/">Log Out</Link></p> 
+        <NavBar/>
 
         <h2>ORGANISATIONS NAME</h2>
 
