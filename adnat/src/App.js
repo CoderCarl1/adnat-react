@@ -1,14 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Homepage from './components/Homepage';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Homepage/>
-    </div>
+    <Router>
+      <div className="App">
+       <h1>Adnat</h1>
+       <LogIn />
+        <Route path="/sign-up" component={SignUp} exact />
+      </div>
+    </Router>
+   
   );
 }
 
-export default App;
+export default App; 
