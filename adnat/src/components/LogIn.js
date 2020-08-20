@@ -7,12 +7,12 @@ const LogIn = () => (
 
         <label className="label">Email</label>
         <br/>
-        <input type="email" className="input" name="email" placeholder="Email" required></input>
+        <input type="email" className="input" name="email" required></input>
         <br/>
         <br/>
         <label className="label">Password</label>
         <br/>
-        <input type="password" className="input" name="password" placeholder="Password" required></input>
+        <input type="password" className="input" name="password" required></input>
         <br/>
         <br/>
         <input type="checkbox" className="input" name="password"></input>

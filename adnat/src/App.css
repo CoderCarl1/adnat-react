@@ -3,11 +3,11 @@
   padding-left: 30px;
 }
 
-li {
+nav li {
   list-style-type: none;
 }
 
-ul {
+nav ul {
   margin-left: 0px;
   padding-left: 0px;
 }
