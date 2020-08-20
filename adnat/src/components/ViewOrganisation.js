@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const JoinOrgansations = () => (
+// When new member signs up they're redirected to this screen and prompted to join organisations
+const ViewOrganisation = () => (
     <>
         <p>Logged in as NAME <Link to="/">Log Out</Link></p> 
 
-        {/* When new member logins in for the first time they should be prompted with this message*/}
         <p>You aren't a member of any organisations.</p>
         <p>Join an existing one or create a new one.</p>
 
@@ -13,13 +13,13 @@ const JoinOrgansations = () => (
 
         <ul>
             <li>
-                Bob's Burgers <Link to="/edit">Edit</Link> <Link to="/join">Join</Link>
+                Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
             </li>
             <li>
-                Moe's Tavern <Link to="/edit">Edit</Link> <Link to="/join">Join</Link>
+                Moe's Tavern <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
             </li>
             <li>
-                Sally's Sandwiches <Link to="/edit">Edit</Link> <Link to="/join">Join</Link>
+                Sally's Sandwiches <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
             </li>
         </ul>
 
@@ -36,4 +36,4 @@ const JoinOrgansations = () => (
     </>
 );
 
-export default JoinOrgansations;
+export default ViewOrganisation;
