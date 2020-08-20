@@ -18,10 +18,10 @@ const LogIn = () => (
         <br/>
         <input type="submit" value="Login"></input>
 
-        {/* <nav>
+        <nav>
             <Link to="/sign-up">Sign up</Link>
-            <Link to="/reset-password">Forgot your password?</Link>
-        </nav> */}
+            {/* <Link to="/reset-password">Forgot your password?</Link> */}
+        </nav> 
         
     </>
 );
