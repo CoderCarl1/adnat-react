@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from "react-router-dom";
+import { setAuthTokens } from "axios-jwt";
 
 const SignUp = () => {
 
@@ -8,7 +9,6 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [token, setToken] = useState("");
     const history = useHistory();
 
     const signUp = event => {
@@ -22,7 +22,7 @@ const SignUp = () => {
         .then(response => {
             console.log(response);
             if (response.data.sessionId) {
-                setToken(response.data.sessionId);
+                setAuthTokens(response.data.sessionId);
                 history.push("/view-organisation");
             }
         });

@@ -1,13 +1,13 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from "react-router-dom";
-import { setAuthTokens } from "axios-jwt";
 
-const LogIn = () => {
+const LogIn = (props) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
+    const {saveToken} = props;
 
     const login = event => {
         event.preventDefault();
@@ -17,7 +17,7 @@ const LogIn = () => {
         })
         .then(response => {
             if (response.data.sessionId) {
-                setAuthTokens(response.data.sessionId);
+                saveToken(response.data.sessionId);
                 history.push("/join-organisation");
             }
         })
