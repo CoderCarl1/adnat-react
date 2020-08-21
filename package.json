@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.19.2",
+    "axios-jwt": "^1.2.0"
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 
 // Once a user joins an organisation they're redirected to this screen
