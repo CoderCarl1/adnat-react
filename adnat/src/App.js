@@ -13,10 +13,22 @@ import './App.css';
 
 function App() {
 
-  const [name, setName] = setState("");
-  const saveName = (name) => {
-    setName(name);
-  };
+  // Store loggedInUser name in local storage
+  function setLoggedInUser(user) {
+    user ? localStorage.setItem("loggedInUser", user) : localStorage.removeItem("loggedInUser")
+  }
+  // Get loggedInUser from localStorage
+  function getLoggedInUser(){
+    return localStorage.getItem("loggedInUser")
+  }
+
+  
+
+
+  // const [name, setName] = setState("");
+  // const saveName = (name) => {
+  //   setName(name);
+  // };
 
   const saveToken = (userToken) => {
     setAuthTokens(userToken);
