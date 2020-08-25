@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "axios": "^0.19.2",
-    "axios-jwt": "^1.2.0"
+    "axios-jwt": "^1.2.0",
+    "components": "^0.1.0",
+    "react-bulma": "^0.0.1",
+    "react-bulma-components": "^3.4.0"
   }
 }

@@ -5,21 +5,21 @@ import axios from 'axios';
 // NavBar displays once a user is logged in
 const NavBar = (props) => {
 
-    const {getToken} = props;
+    // const {getToken} = props;
 
-    useEffect(() => {
-        const token = getToken();
-        // .then((response) => {(axios.get('http://localhost:3000/users/me', {
-        //         headers: {
-        //             "Authorisation": response,
-        //             "Content-Type": "application/json"
-        //         }
-        //     }).then(response => {
-        //         console.log(response);
-        //     })
-        // )})
+    // useEffect(() => {
+    //     const token = getToken();
+    //     // .then((response) => {(axios.get('http://localhost:3000/users/me', {
+    //     //         headers: {
+    //     //             "Authorisation": response,
+    //     //             "Content-Type": "application/json"
+    //     //         }
+    //     //     }).then(response => {
+    //     //         console.log(response);
+    //     //     })
+    //     // )})
         
-    }) 
+    // }) 
     
     return (
         <>
