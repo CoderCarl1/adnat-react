@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
+import axios from "axios";
 
 // Once a user has joined an organisation they're redirected to this screen
-const JoinOrganisation = (props) => {
+const JoinOrganisation = ({ name, sessionId }) => {
+let organisations = ""; 
 
-    const { getToken } = props;
+    useEffect(() => {
+        axios.get("http://localhost:3000/organisations" , {
+            headers: {
+                "Authorization": sessionId,
+                "Content-Type": "application/json"
+            }
+        });
+        .then(response => {
+            organisations = response.data;
+        })
+    })
 
     return (
         <>
-            <NavBar getToken={getToken} />
+            <NavBar name={name} />
 
             <h2>ORGANISATIONS NAME</h2>
 

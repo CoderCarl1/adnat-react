@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from "react-router-dom";
 
-const LogIn = (props) => {
+const LogIn = ({ saveSessionId }) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
-    const {saveToken} = props;
+
+    const saveSession = (sessionId) => {
+        saveSessionId(sessionId);
+    }
 
     const login = event => {
         event.preventDefault();
@@ -17,7 +20,7 @@ const LogIn = (props) => {
         })
         .then(response => {
             if (response.data.sessionId) {
-                saveToken(response.data.sessionId);
+                saveSession(response.data.sessionId);
                 history.push("/join-organisation");
             }
         })

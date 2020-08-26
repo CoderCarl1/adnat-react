@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 // NavBar displays once a user is logged in
-const NavBar = (props) => {
-
-    // const {getToken} = props;
+const NavBar = ({ name }) => {
 
     // useEffect(() => {
     //     const token = getToken();
@@ -23,7 +21,7 @@ const NavBar = (props) => {
     
     return (
         <>
-            <p>Logged in as NAME <Link to="/">Log Out</Link></p> 
+            <p>Logged in as {name} <Link to="/">Log Out</Link></p> 
         </>
 )};
 
