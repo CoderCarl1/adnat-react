@@ -23,7 +23,7 @@ const SignUp = () => {
             console.log(response);
             if (response.data.sessionId) {
                 setAuthTokens(response.data.sessionId);
-                history.push("/view-organisation");
+                history.push("/view-organisations");
             }
         });
     }

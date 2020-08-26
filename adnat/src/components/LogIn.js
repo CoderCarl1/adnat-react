@@ -21,7 +21,7 @@ const LogIn = ({ saveSessionId }) => {
         .then(response => {
             if (response.data.sessionId) {
                 saveSession(response.data.sessionId);
-                history.push("/join-organisation");
+                history.push("/view-organisations");
             }
         })
     }
@@ -41,7 +41,7 @@ const LogIn = ({ saveSessionId }) => {
                 <input type="password" className="input" name="password" value={password} onChange={e => setPassword(e.target.value)} required></input>
                 <br/>
                 <br/>
-                <input type="checkbox" className="input" name="password"></input>
+                <input type="checkbox" className="checkbox" name="password"></input>
                 <label className="label">Remember me</label>
                 <br/>
                 <br/>

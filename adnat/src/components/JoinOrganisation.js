@@ -13,7 +13,7 @@ let organisations = "";
                 "Authorization": sessionId,
                 "Content-Type": "application/json"
             }
-        });
+        })
         .then(response => {
             organisations = response.data;
         })
@@ -23,7 +23,7 @@ let organisations = "";
         <>
             <NavBar name={name} />
 
-            <h2>ORGANISATIONS NAME</h2>
+            <h2>{organisations}</h2>
 
             <Link to="/view-shifts">View Shifts</Link> <Link to="/edit-organisation">Edit</Link>  <Link to="/leave-organisation">Leave</Link>
         </>
