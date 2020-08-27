@@ -12,6 +12,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
     const [userId, setUserId] = useState(0);
     const history = useHistory();
 
+    // create and join new organisations
     const createAndJoinOrganisation = event => {
         event.preventDefault();
         axios.post("http://localhost:3000/organisations/create_join", {
@@ -28,6 +29,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
         })
     }
 
+    // gets list of organisations user is currently part of
     useEffect(() => {
         axios.get("http://localhost:3000/organisations", {
             headers: {
