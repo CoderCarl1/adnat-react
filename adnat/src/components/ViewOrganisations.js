@@ -9,6 +9,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
     const [createAndJoin, setCreateAndJoin] = useState("");
     const [OrganisationName, setName] = useState("");
     const [hourlyRate, setHourlyRate] = useState("");
+    const [userId, setUserId] = useState(0);
     const history = useHistory();
 
     const createAndJoinOrganisation = event => {
@@ -38,7 +39,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
             console.log(response.data);
             setOrganisations(response.data);
         })
-    })
+    }, [userId])
 
     return ( 
     <>

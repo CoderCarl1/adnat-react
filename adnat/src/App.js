@@ -37,7 +37,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h1>Adnat</h1>
+        <h1 className="mainHeading">Adnat</h1>
           <Route path="/" render={() => (<LogIn saveSessionId={saveSessionId}/>)}  exact />
           <Route path="/password-reset" component={PasswordReset} exact />
           <Route path="/sign-up" render={() => (<SignUp saveSessionId={saveSessionId}/>)} exact />

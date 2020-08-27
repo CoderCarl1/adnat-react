@@ -1,6 +1,7 @@
 .App {
   text-align: left;
-  padding-left: 30px;
+  padding-top: 30px;
+  padding-left: 40px;
 }
 
 nav li {
@@ -18,5 +19,11 @@ nav ul {
   }
 }
 
+.mainHeading {
+  text-decoration: underline;
+  font-size: 40px;
+  color: blue;
+  font-weight: bolder;
+}
 
 
