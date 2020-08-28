@@ -7,6 +7,7 @@ import axios from "axios";
 const ViewOrganisation = ({ name, sessionId }) => {
     //const [organisationId, setOrganisationId] = useState("");
     const [organisationName, setOrganisationName] = useState("");
+    const [userId, setUserId] = useState(0);
 
     // gets users organisation id
     // useEffect(() => {
@@ -34,7 +35,7 @@ const ViewOrganisation = ({ name, sessionId }) => {
             console.log(response.data);
             setOrganisationName(response.data.name );
         })
-    })
+    }, [userId])
 
     return (
         <>
