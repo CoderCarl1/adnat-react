@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
-import { setAuthTokens, getAccessToken, isLoggedIn } from "axios-jwt";
 import LogIn from './components/LogIn';
 import PasswordReset from './components/PasswordReset';
 import SignUp from './components/SignUp';
 import ViewOrganisations from './components/ViewOrganisations';
+import ViewOrganisation from './components/ViewOrganisation';
 import EditOrganisation from './components/EditOrganisation';
 import JoinOrganisation from './components/JoinOrganisation';
 import ViewShift from './components/ViewShift';
@@ -39,6 +39,7 @@ function App() {
       <div className="App">
         <h1 className="mainHeading">Adnat</h1>
           <Route path="/" render={() => (<LogIn saveSessionId={saveSessionId}/>)}  exact />
+          <Route path="/view-organisation" render={() => (<ViewOrganisation name={name} sessionId={sessionId} /> )} exact />
           <Route path="/password-reset" component={PasswordReset} exact />
           <Route path="/sign-up" render={() => (<SignUp saveSessionId={saveSessionId}/>)} exact />
           <Route path="/view-organisations" render={() => (<ViewOrganisations name={name} sessionId={sessionId} />)} exact />

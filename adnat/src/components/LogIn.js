@@ -21,7 +21,7 @@ const LogIn = ({ saveSessionId }) => {
         .then(response => {
             if (response.data.sessionId) {
                 saveSession(response.data.sessionId);
-                history.push("/view-organisations");
+                history.push("/view-organisation");
             }
         })
     }
