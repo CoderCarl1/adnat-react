@@ -4,10 +4,11 @@ import NavBar from "./NavBar";
 import axios from "axios";
 
 // Once a user has joined an organisation they're redirected to this screen where they can view their organisation
-const ViewOrganisation = ({ name, sessionId }) => {
+const ViewOrganisation = ({ name, sessionId, organisationId }) => {
     //const [organisationId, setOrganisationId] = useState("");
-    const [organisationName, setOrganisationName] = useState("");
-    const [userId, setUserId] = useState(0);
+    const [organisationName, setOrganisationName] = useState([]);
+    
+    // const [userId, setUserId] = useState(0);
 
     // gets users organisation id
     // useEffect(() => {
@@ -33,15 +34,16 @@ const ViewOrganisation = ({ name, sessionId }) => {
         })
         .then(response => {
             console.log(response.data);
-            setOrganisationName(response.data.name );
+            setOrganisationName(response.data.name);
         })
-    }, [userId])
+    }, [])
 
     return (
         <>
             <NavBar name={name} />
 
             {/* <h2>{organisationId}</h2> */}
+            <h2>{organisationId}</h2>
             <h2>{organisationName}</h2>
 
             <Link to="/view-shifts">View Shifts</Link> <Link to="/edit-organisation">Edit</Link>  <Link to="/leave-organisation">Leave</Link>
