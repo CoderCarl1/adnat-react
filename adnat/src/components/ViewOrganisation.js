@@ -40,7 +40,7 @@ const ViewOrganisation = ({ name, sessionId, organisationId }) => {
 
     return (
         <>
-            <NavBar name={name} />
+            <NavBar name={name}>{sessionId}</NavBar>
 
             {/* <h2>{organisationId}</h2> */}
             <h2>{organisationId}</h2>

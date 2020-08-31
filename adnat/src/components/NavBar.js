@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 
 // NavBar displays once a user is logged in
-const NavBar = ({ name }) => {
+const NavBar = ({ name, sessionId }) => {
 
     const history = useHistory();
+    const endSession = (sessionId) => {
+        endSession(sessionId);
+    }
 
     const logout = event => {
-        event.preventDefault();
-        axios.delete('http://localhost:3000/auth/logout')
-        .then(reponse => {
+        //event.preventDefault();
+        console.log(sessionId);
+        axios.delete('http://localhost:3000/auth/logout', {
+        }, {
+            headers: {
+                "Authorization": sessionId,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            if (response.data.sessionId);
+            endSession(response.data.sessionId);
             history.push("/");
         })
     }
-    // useEffect(() => {
-    //     const token = getToken();
-    //     // .then((response) => {(axios.get('http://localhost:3000/users/me', {
-    //     //         headers: {
-    //     //             "Authorisation": response,
-    //     //             "Content-Type": "application/json"
-    //     //         }
-    //     //     }).then(response => {
-    //     //         console.log(response);
-    //     //     })
-    //     // )})
-        
-    // }) 
     
     return (
         <>
-            <p>Logged in as {name} <Link onClick={logout}>Log Out</Link></p> 
+            <p>Logged in as {name} <Link to="/" onClick={e => logout(e.target.value)} exact>Log Out</Link></p> 
         </>
 )};
 
