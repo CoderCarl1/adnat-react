@@ -5,11 +5,10 @@ import axios from "axios";
 
 // When new member signs up they're redirected to this screen and prompted to join organisations
 const ViewOrganisations = ({ name, sessionId }) => {
-    const [organistations, setOrganisations] = useState("");
+    const [organistations, setOrganisations] = useState([]);
     const [createAndJoin, setCreateAndJoin] = useState("");
     const [OrganisationName, setName] = useState("");
-    const [hourlyRate, setHourlyRate] = useState("");
-    const [userId, setUserId] = useState(0);
+    const [hourlyRate, setHourlyRate] = useState("")
     const history = useHistory();
 
     // create and join new organisations
@@ -29,7 +28,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
         })
     }
 
-    // gets list of organisations user is currently part of
+    // gets list of all available organisations 
     useEffect(() => {
         axios.get("http://localhost:3000/organisations", {
             headers: {
@@ -41,7 +40,11 @@ const ViewOrganisations = ({ name, sessionId }) => {
             console.log(response.data);
             setOrganisations(response.data);
         })
-    }, [userId])
+    }, [])
+
+    // {organistation.map((organisations, key) => (
+    //     <li key={key}>{organisations.name}</li>
+    // ))}
 
     return ( 
     <>
@@ -51,11 +54,14 @@ const ViewOrganisations = ({ name, sessionId }) => {
         <p>Join an existing one or create a new one.</p>
 
         <h2>Organisations</h2>
-        {/* <p>{organistations}</p> */}
+        <p>{organistations.map((organisation, key) => (
+            <p key={key}>{organisation.name}</p>
+            ))}
+        </p>
 
         <ul>
             <li>
-                Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
+                 Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
             </li>
             <li>
                 Moe's Tavern <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>

@@ -6,11 +6,12 @@ import axios from 'axios';
 const NavBar = ({ name, sessionId }) => {
 
     const history = useHistory();
+    
     const endSession = (sessionId) => {
         endSession(sessionId);
     }
 
-    const logout = event => {
+    const logout = (e) => {
         //event.preventDefault();
         console.log(sessionId);
         axios.delete('http://localhost:3000/auth/logout', {
@@ -21,15 +22,15 @@ const NavBar = ({ name, sessionId }) => {
             }
         })
         .then(response => {
-            if (response.data.sessionId);
-            endSession(response.data.sessionId);
+            if (response.data);
+            endSession(response.data);
             history.push("/");
         })
     }
     
     return (
         <>
-            <p>Logged in as {name} <Link to="/" onClick={e => logout(e.target.value)} exact>Log Out</Link></p> 
+            <p>Logged in as {name} <Link exact to="/" onClick={logout}>Log Out</Link></p> 
         </>
 )};
 

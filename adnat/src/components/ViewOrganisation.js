@@ -7,8 +7,9 @@ import axios from "axios";
 const ViewOrganisation = ({ name, sessionId, organisationId }) => {
     //const [organisationId, setOrganisationId] = useState("");
     const [organisationName, setOrganisationName] = useState([]);
-    
-    // const [userId, setUserId] = useState(0);
+    //const organisationName = match.params.organisationId;
+    // const myOrganisation = 
+
 
     // gets users organisation id
     // useEffect(() => {
@@ -47,6 +48,11 @@ const ViewOrganisation = ({ name, sessionId, organisationId }) => {
             <h2>{organisationName}</h2>
 
             <Link to="/view-shifts">View Shifts</Link> <Link to="/edit-organisation">Edit</Link>  <Link to="/leave-organisation">Leave</Link>
+
+            {/* {organisationId.map((organisation, key) => (
+                key={key}
+                <h2>{organisation.name}</h2>
+            ))} */}
         </>
 )};
 

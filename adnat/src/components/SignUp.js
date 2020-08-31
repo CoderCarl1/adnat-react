@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from "react-router-dom";
-import { setAuthTokens } from "axios-jwt";
 
-const SignUp = () => {
+const SignUp = ({ saveSessionId }) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const history = useHistory();
+
+    const saveSession = (sessionId) => {
+        saveSessionId(sessionId);
+    }
 
     const signUp = event => {
         event.preventDefault();
@@ -22,7 +25,7 @@ const SignUp = () => {
         .then(response => {
             console.log(response);
             if (response.data.sessionId) {
-                setAuthTokens(response.data.sessionId);
+                saveSession(response.data.sessionId);
                 history.push("/view-organisations");
             }
         });
