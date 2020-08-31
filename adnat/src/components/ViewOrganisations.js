@@ -42,23 +42,28 @@ const ViewOrganisations = ({ name, sessionId }) => {
         })
     }, [])
 
-    // {organistation.map((organisations, key) => (
-    //     <li key={key}>{organisations.name}</li>
-    // ))}
-
     return ( 
     <>
         <NavBar name={name}/>
 
         <p>You aren't a member of any organisations.</p>
-        <p>Join an existing one or create a new one.</p>
+        <p>Join an existing one or create a new one.</p><br/>
 
-        <h2>Organisations</h2>
-        <p>{organistations.map((organisation, key) => (
+        <h2>Organisations</h2><br/>
+
+        <ul>
+        {organistations.map((organisation, key)=>(
+            <li key={key}>{organisation.name}</li>
+        ))}
+        </ul>
+
+        {/* <p>{organistations.map((organisation, key)=>(
             <p key={key}>{organisation.name}</p>
             ))}
-        </p>
+        </p> */}
 
+        <br/>
+        <br/>
         <ul>
             <li>
                  Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
