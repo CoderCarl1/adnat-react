@@ -21,8 +21,8 @@ const ViewOrganisations = ({ name, sessionId }) => {
     // (value={organisationId} onChange={e => setOrganisationId(e.target.value)})
 
     // joins an organisation 
-    const joinOrganisation = (organisationId) => {
-        console.log(organisationId);
+    const joinOrganisation = event => {
+        console.log(event);
         axios.post("http://localhost:3000/organisations/join", {
             id: organisationId,      
             // name: organisationName,
@@ -31,9 +31,12 @@ const ViewOrganisations = ({ name, sessionId }) => {
             headers: headers
         })
         .then(response => {
-            history.push("/join-organisation");
+            history.push("/view-organisation");
         })
     }
+
+    //edit an organisation
+
 
     // create and join new organisations
     const createAndJoinOrganisation = event => {
@@ -45,7 +48,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
             headers: headers
         })
         .then(response => {
-            history.push("/join-organisation");
+            history.push("/view-organisation");
         })
     }
 
@@ -71,7 +74,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
 
         <ul>
         {organistations.map((organisation, key)=>(
-            <li key={key}>{organisation.name} <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link></li>
+            <li key={key}>{organisation.name} <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link></li>
         ))}
         </ul>
 
@@ -84,13 +87,13 @@ const ViewOrganisations = ({ name, sessionId }) => {
         <br/>
         <ul>
             <li>
-                 Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link onClick={joinOrganisation({organisationId: 1})}>Join</Link>
+                 Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link onClick={joinOrganisation}>Join</Link>
             </li>
             <li>
-                Moe's Tavern <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
+                Moe's Tavern <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link>
             </li>
             <li>
-                Sally's Sandwiches <Link to="/edit-organisation">Edit</Link> <Link to="/join-organisation">Join</Link>
+                Sally's Sandwiches <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link>
             </li>
         </ul>
 

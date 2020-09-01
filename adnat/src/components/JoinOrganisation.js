@@ -27,6 +27,6 @@ let organisations = "";
 
             <Link to="/view-shifts">View Shifts</Link> <Link to="/edit-organisation">Edit</Link>  <Link to="/leave-organisation">Leave</Link>
         </>
-)};
+)}; 
 
 export default JoinOrganisation;
