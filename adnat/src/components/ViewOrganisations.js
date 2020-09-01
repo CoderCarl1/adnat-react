@@ -21,8 +21,11 @@ const ViewOrganisations = ({ name, sessionId }) => {
     // (value={organisationId} onChange={e => setOrganisationId(e.target.value)})
 
     // joins an organisation 
-    const joinOrganisation = event => {
-        console.log(event);
+    const joinOrganisation = (organisationIdSupplied) => {
+        // set organisationId
+        setOrganisationId(organisationIdSupplied);
+        // event.preventDefault();
+        console.log(organisationId);
         axios.post("http://localhost:3000/organisations/join", {
             id: organisationId,      
             // name: organisationName,
@@ -87,7 +90,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
         <br/>
         <ul>
             <li>
-                 Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link onClick={joinOrganisation}>Join</Link>
+                 Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation" onClick={joinOrganisation(1)}>Join</Link>
             </li>
             <li>
                 Moe's Tavern <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link>
