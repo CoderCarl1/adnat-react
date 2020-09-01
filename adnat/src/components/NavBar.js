@@ -7,19 +7,21 @@ const NavBar = ({ name, sessionId }) => {
 
     const history = useHistory();
     
+    const headers = {
+        "Authorization": sessionId,
+        "Content-Type": "application/json"
+    }
+
     const endSession = (sessionId) => {
         endSession(sessionId);
     }
 
-    const logout = (e) => {
+    const logout = (event) => {
         //event.preventDefault();
         console.log(sessionId);
         axios.delete('http://localhost:3000/auth/logout', {
         }, {
-            headers: {
-                "Authorization": sessionId,
-                "Content-Type": "application/json"
-            }
+            headers: headers
         })
         .then(response => {
             if (response.data);

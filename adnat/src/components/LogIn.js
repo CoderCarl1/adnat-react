@@ -21,7 +21,10 @@ const LogIn = ({ saveSessionId }) => {
         .then(response => {
             if (response.data.sessionId) {
                 saveSession(response.data.sessionId);
-                history.push("/view-organisation");
+                // once completed view orgainsations page change back to this:
+                // history.push("/view-organisation");
+                // and delete this:
+                history.push("/view-organisations");
             }
         })
     }
