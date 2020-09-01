@@ -5,7 +5,7 @@ import axios from "axios";
 
 // When new member signs up they're redirected to this screen and prompted to join organisations
 const ViewOrganisations = ({ name, sessionId }) => {
-    const [organistations, setOrganisations] = useState([]);
+    const [organisations, setOrganisations] = useState([]);
     // const [createAndJoin, setCreateAndJoin] = useState("");
     const [organisationName, setName] = useState("");
     const [hourlyRate, setHourlyRate] = useState("");
@@ -23,7 +23,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
     // joins an organisation 
     const joinOrganisation = (organisationIdSupplied) => {
         // set organisationId
-        setOrganisationId(organisationIdSupplied);
+        // setOrganisationId(organisationIdSupplied);
         // event.preventDefault();
         console.log(organisationId);
         axios.post("http://localhost:3000/organisations/join", {
@@ -76,12 +76,12 @@ const ViewOrganisations = ({ name, sessionId }) => {
         <h2>Organisations</h2><br/>
 
         <ul>
-        {organistations.map((organisation, key)=>(
-            <li key={key}>{organisation.name} <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link></li>
+        {organisations.map((organisation, key)=>(
+            <li key={key}>{organisation.name} Organisation Id:{organisation.id}<Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link></li>
         ))}
         </ul>
 
-        {/* <p>{organistations.map((organisation, key)=>(
+        {/* <p>{organisations.map((organisation, key)=>(
             <p key={key}>{organisation.name}</p>
             ))}
         </p> */}
