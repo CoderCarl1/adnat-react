@@ -21,11 +21,16 @@ const LogIn = ({ saveSessionId }) => {
         .then(response => {
             if (response.data.sessionId) {
                 saveSession(response.data.sessionId);
-                // once completed view orgainsations page change back to this:
-                // history.push("/view-organisation");
-                // and delete this:
-                history.push("/view-organisations");
-            }
+                axios.get('http://localhost:3000/users/me', {
+                    headers: {
+                        "Authorization": response.data.sessionId,
+                        "Content-Type": "application/json"
+              }
+          }).then(response => {
+                console.log(response.data.organisationId);
+                history.push(`/view-organisation/${response.data.organisationId}`);
+            })
+        }
         })
     }
 

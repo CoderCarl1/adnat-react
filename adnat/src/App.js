@@ -14,7 +14,7 @@ import './App.css';
 function App() {
   
   const [name, setName] = useState("");
-  const [organisationId, setOrganistationId] = useState(""); 
+  const [organisationId, setOrganistationId] = useState("");
   const [sessionId, setSessionId] = useState("")
   const saveSessionId = (sessionId) => {
     setSessionId(sessionId);
@@ -39,8 +39,7 @@ function App() {
     <Router>
       <div className="App">
         <h1 className="mainHeading">Adnat</h1>
-          <Route path="/" render={() => (<LogIn saveSessionId={saveSessionId}/>)}  exact />
-          
+          <Route path="/" render={() => (<LogIn saveSessionId={saveSessionId} organisationId={organisationId} />)}  exact />
           <Route path="/password-reset" component={PasswordReset} exact />
           <Route path="/sign-up" render={() => (<SignUp saveSessionId={saveSessionId}/>)} exact />
           <Route path="/view-organisations" render={() => (<ViewOrganisations name={name} sessionId={sessionId} />)} exact />
