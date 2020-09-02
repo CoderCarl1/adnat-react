@@ -40,10 +40,11 @@ function App() {
       <div className="App">
         <h1 className="mainHeading">Adnat</h1>
           <Route path="/" render={() => (<LogIn saveSessionId={saveSessionId}/>)}  exact />
-          <Route path="/view-organisation" render={() => (<ViewOrganisation name={name} sessionId={sessionId} organisationId={organisationId} /> )} exact />
+          
           <Route path="/password-reset" component={PasswordReset} exact />
           <Route path="/sign-up" render={() => (<SignUp saveSessionId={saveSessionId}/>)} exact />
           <Route path="/view-organisations" render={() => (<ViewOrganisations name={name} sessionId={sessionId} />)} exact />
+          <Route path="/view-organisation/:id" render={() => (<ViewOrganisation name={name} sessionId={sessionId} organisationId={organisationId} /> )} exact />
           <Route path="/edit-organisation/:id" component={EditOrganisation} exact />
           {/* <Route path="/join-organisation" render={() => (<JoinOrganisation name={name} sessionId={sessionId} />)} exact /> */}
           <Route path="/view-shifts" component={ViewShift} exact />

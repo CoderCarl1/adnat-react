@@ -21,25 +21,19 @@ const ViewOrganisations = ({ name, sessionId }) => {
     // (value={organisationId} onChange={e => setOrganisationId(e.target.value)})
 
     // joins an organisation 
-    const joinOrganisation = (organisationIdSupplied) => {
-        // set organisationId
-        // setOrganisationId(organisationIdSupplied);
-        // event.preventDefault();
+    const joinOrganisation = (organisationId) => {
         console.log(organisationId);
         axios.post("http://localhost:3000/organisations/join", {
-            id: organisationId,      
-            // name: organisationName,
-            // hourlyRate: hourlyRate,
+            organisationId: organisationId,     
         }, {
             headers: headers
         })
         .then(response => {
-            history.push("/view-organisation");
+            console.log(response.data);
+            // setOrganisationId(response.data);
+            history.push(`/view-organisation/${organisationId}`);
         })
     }
-
-    //edit an organisation
-
 
     // create and join a new organisation
     const createAndJoinOrganisation = event => {
@@ -77,18 +71,11 @@ const ViewOrganisations = ({ name, sessionId }) => {
 
         <ul>
         {organisations.map((organisation, key)=>(
-            <li key={key}>{organisation.name} Organisation Id:{organisation.id}<Link to={`/edit-organisation/${organisation.id}`}>Edit</Link> <Link to="/view-organisation">Join</Link></li>
+            <li key={key}>{organisation.name} Organisation Id:{organisation.id}
+            <Link to={`/edit-organisation/${organisation.id}`}>Edit</Link> 
+            <Link onClick={() => joinOrganisation(organisation.id)}>Join</Link></li>
         ))}
         </ul><br/><br/>
-        
-        <ul>
-            <li>
-                Moe's Tavern <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link>
-            </li>
-            <li>
-                Sally's Sandwiches <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link>
-            </li>
-        </ul><br/><br/>        
         
         <h2>Create Organisation</h2>
         <form onSubmit={createAndJoinOrganisation}>
