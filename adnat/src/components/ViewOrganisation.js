@@ -30,7 +30,7 @@ const ViewOrganisation = ({ name, sessionId, organisationId }) => {
 
     // gets all organisations
     useEffect(() => {
-        console.log(organisations);
+        // console.log(organisations);
         axios.get("http://localhost:3000/organisations", {
             headers: headers
         })

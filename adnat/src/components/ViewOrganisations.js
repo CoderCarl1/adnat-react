@@ -45,7 +45,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
             headers: headers
         })
         .then(response => {
-            history.push("/view-organisation");
+            history.push(`/view-organisation/${response.data.organisationId}`);
         })
     }
 
