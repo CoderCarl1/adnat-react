@@ -44,7 +44,7 @@ function App() {
           <Route path="/password-reset" component={PasswordReset} exact />
           <Route path="/sign-up" render={() => (<SignUp saveSessionId={saveSessionId}/>)} exact />
           <Route path="/view-organisations" render={() => (<ViewOrganisations name={name} sessionId={sessionId} />)} exact />
-          <Route path="/edit-organisation" component={EditOrganisation} exact />
+          <Route path="/edit-organisation/:id" component={EditOrganisation} exact />
           {/* <Route path="/join-organisation" render={() => (<JoinOrganisation name={name} sessionId={sessionId} />)} exact /> */}
           <Route path="/view-shifts" component={ViewShift} exact />
       </div>

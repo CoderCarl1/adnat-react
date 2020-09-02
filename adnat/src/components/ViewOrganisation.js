@@ -9,7 +9,7 @@ const ViewOrganisation = ({ name, sessionId, organisationId }) => {
     // sets all organisations
     const [organisations, setOrganisations] = useState([]);
 
-    // get organisations name from id
+    // gets all organisations
     useEffect(() => {
         console.log(organisations);
         axios.get("http://localhost:3000/organisations", {

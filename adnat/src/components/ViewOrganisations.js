@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import axios from "axios";
 
-// When new member signs up they're redirected to this screen and prompted to join organisations
+// When new member signs up they're redirected to this screen and prompted to join an organisation
 const ViewOrganisations = ({ name, sessionId }) => {
     const [organisations, setOrganisations] = useState([]);
     // const [createAndJoin, setCreateAndJoin] = useState("");
@@ -11,7 +11,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
     const [hourlyRate, setHourlyRate] = useState("");
     // const [joinOrganisation, setJoinOrganisation] = useState("");
     const [organisationId, setOrganisationId] = useState("");
-    const history = useHistory();
+    const history = useHistory();    
 
     const headers = {
         "Authorization": sessionId,
@@ -41,7 +41,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
     //edit an organisation
 
 
-    // create and join new organisations
+    // create and join a new organisation
     const createAndJoinOrganisation = event => {
         event.preventDefault();
         axios.post("http://localhost:3000/organisations/create_join", {
@@ -77,31 +77,19 @@ const ViewOrganisations = ({ name, sessionId }) => {
 
         <ul>
         {organisations.map((organisation, key)=>(
-            <li key={key}>{organisation.name} Organisation Id:{organisation.id}<Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link></li>
+            <li key={key}>{organisation.name} Organisation Id:{organisation.id}<Link to={`/edit-organisation/${organisation.id}`}>Edit</Link> <Link to="/view-organisation">Join</Link></li>
         ))}
-        </ul>
-
-        {/* <p>{organisations.map((organisation, key)=>(
-            <p key={key}>{organisation.name}</p>
-            ))}
-        </p> */}
-
-        <br/>
-        <br/>
+        </ul><br/><br/>
+        
         <ul>
-            <li>
-                 Bob's Burgers <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation" onClick={joinOrganisation(1)}>Join</Link>
-            </li>
             <li>
                 Moe's Tavern <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link>
             </li>
             <li>
                 Sally's Sandwiches <Link to="/edit-organisation">Edit</Link> <Link to="/view-organisation">Join</Link>
             </li>
-        </ul>
-
-        <br/>
-        <br/>
+        </ul><br/><br/>        
+        
         <h2>Create Organisation</h2>
         <form onSubmit={createAndJoinOrganisation}>
             <label className="label">Name:</label> 
