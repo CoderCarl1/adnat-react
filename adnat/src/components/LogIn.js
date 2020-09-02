@@ -27,8 +27,11 @@ const LogIn = ({ saveSessionId }) => {
                         "Content-Type": "application/json"
               }
           }).then(response => {
-                console.log(response.data.organisationId);
+              if (response.data.organisationId === null) {
+                  history.push("/view-organisations");
+              } else {
                 history.push(`/view-organisation/${response.data.organisationId}`);
+              }
             })
         }
         })
