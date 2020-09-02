@@ -10,7 +10,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
     const [organisationName, setName] = useState("");
     const [hourlyRate, setHourlyRate] = useState("");
     // const [joinOrganisation, setJoinOrganisation] = useState("");
-    const [organisationId, setOrganisationId] = useState("");
+    // const [organisationId, setOrganisationId] = useState("");
     const history = useHistory();    
 
     const headers = {
@@ -71,7 +71,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
 
         <ul>
         {organisations.map((organisation, key)=>(
-            <li key={key}>{organisation.name} Organisation Id:{organisation.id}
+            <li key={key}>{organisation.name}
             <Link to={`/edit-organisation/${organisation.id}`}>Edit</Link> 
             <Link onClick={() => joinOrganisation(organisation.id)}>Join</Link></li>
         ))}

@@ -44,9 +44,9 @@ function App() {
           <Route path="/sign-up" render={() => (<SignUp saveSessionId={saveSessionId}/>)} exact />
           <Route path="/view-organisations" render={() => (<ViewOrganisations name={name} sessionId={sessionId} />)} exact />
           <Route path="/view-organisation/:id" render={() => (<ViewOrganisation name={name} sessionId={sessionId} organisationId={organisationId} /> )} exact />
-          <Route path="/edit-organisation/:id" component={EditOrganisation} exact />
+          <Route path="/edit-organisation/:id" render={() => (<EditOrganisation name={name} sessionId={sessionId} organisationId={organisationId} /> )} exact />
           {/* <Route path="/join-organisation" render={() => (<JoinOrganisation name={name} sessionId={sessionId} />)} exact /> */}
-          <Route path="/view-shifts" component={ViewShift} exact />
+          <Route path="/view-shifts/:id" render={() => (<ViewShift name={name} sessionId={sessionId} organisationId={organisationId} /> )}exact />
       </div>
     </Router>
   );
