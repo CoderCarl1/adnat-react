@@ -25,6 +25,7 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
         "Content-Type": "application/json"
     }
 
+    // update organisations name and hourly rate
     const updateOrganisation = event => {
         event.preventDefault();
         axios.put(`http://localhost:3000/organisations/${organisationId}`, {
@@ -35,6 +36,18 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
         })
         .then(response => {
             history.push(`/view-organisation/${organisationId}`);
+        })
+    }
+
+    // delete organisation
+    const deleteOrganisation = () => {
+        axios.delete("http://localhost:3000/organisations/leave", {
+        }, {
+            headers: headers
+        })
+        .then(response => {
+            console.log(response.data);
+            history.push("/view-organisations");
         })
     }
 
@@ -51,7 +64,7 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
     
     return (
     <>
-        <NavBar/> 
+        <NavBar name={name}>{sessionId}</NavBar> 
 
         <h2>Edit Organisation</h2>
         <form onSubmit={updateOrganisation}>
@@ -63,7 +76,7 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
             <br/>
             <input type="submit" value="Update"></input>
             <br/>
-            <Link to="/delete">Delete</Link>
+            <Link onClick={() => deleteOrganisation()}>Delete</Link>
         </form>
     </>
 )}; 
