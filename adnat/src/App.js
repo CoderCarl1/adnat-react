@@ -14,6 +14,7 @@ import './App.css';
 function App() {
   
   const [name, setName] = useState("");
+  const [userId, setUserId] = useState("");
   const [organisationId, setOrganistationId] = useState("");
   const [sessionId, setSessionId] = useState("")
   const saveSessionId = (sessionId) => {
@@ -32,6 +33,7 @@ function App() {
               console.log(response);
               setName(response.data.name);
               setOrganistationId(response.data.organisationId);
+              setUserId(response.data.id);
     // }
   })})
 
@@ -46,7 +48,7 @@ function App() {
           <Route path="/view-organisation/:id" render={() => (<ViewOrganisation name={name} sessionId={sessionId} organisationId={organisationId} /> )} exact />
           <Route path="/edit-organisation/:id" render={() => (<EditOrganisation name={name} sessionId={sessionId} organisationId={organisationId} /> )} exact />
           {/* <Route path="/join-organisation" render={() => (<JoinOrganisation name={name} sessionId={sessionId} />)} exact /> */}
-          <Route path="/view-shifts/:id" render={() => (<ViewShift name={name} sessionId={sessionId} organisationId={organisationId} /> )}exact />
+          <Route path="/view-shifts/:id" render={() => (<ViewShift name={name} sessionId={sessionId} organisationId={organisationId} userId={userId} /> )}exact />
       </div>
     </Router>
   );
