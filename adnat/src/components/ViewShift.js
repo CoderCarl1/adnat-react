@@ -8,7 +8,9 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
 
     const history = useHistory();
     const [organisationName, setOrganisationName] = useState("");
+    const [userName, setUsersName] = useState("");
     const [hourlyRate, setHourlyRate] = useState("");
+    
 
     const headers = {
         "Authorization": sessionId,
@@ -23,16 +25,28 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
 
     // format date
     const [startDate, setStartDate] = useState("");
-    function formatDate(string) {
-        var options = { day: 'numeric', month: 'numeric', year: 'numeric'};
-        return new Date(string).toLocaleDateString([],options);
+    function formatDate(fullDate) {
+        let options = { day: 'numeric', month: 'numeric', year: 'numeric'};
+        return new Date(fullDate).toLocaleDateString([],options);
     }
 
-    // // sets all organisations
-    // const [organisations, setOrganisations] = useState([]);
+    //format hours worked
+    function formatHoursWorked(startingTime, finishingTime, breakTime) {
+        let convertedStartingTime = Math.floor(startingTime * 60);
+        let convertedFinishingTime = Math.floor(finishingTime * 60);
+    
+        return ((convertedFinishingTime - convertedStartingTime - breakTime)/60);
+    }
     
     // set all shifts
     const [shifts, setShifts] = useState([]);
+    // const [usersDetails, setUsersDetails] = useState("");
+
+    const setUsersDetails = (users) => {
+        let userData = users.filter(user => user.id === userId)
+        console.log(userData)
+        setUsersName(userData[0].name)
+    }
 
     // rendering table
     const renderTableData = () => {
@@ -40,11 +54,14 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             const { id, userId, start, finish, breakLength} = shift
             return (
                 <tr key={id}>
+                    {/* <td>{setUsersDetails(userId)}</td> */}
                     <td>{userId}</td>
-                    <td>{formatDate(startDate)}</td>
+                    <td>{formatDate(start)}</td>
                     <td>{start}</td>
                     <td>{finish}</td>
                     <td>{breakLength}</td>
+                    <td>{formatHoursWorked(start, finish, breakLength)}</td>
+                    <td></td>
                 </tr>
             )
         })
@@ -70,10 +87,21 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         })
         .then(response => {
             console.log(response.data);
-            history.push(`/view-shifts/${organisationId}`)
+            //history.push(`/view-shifts/${organisationId}`)
         })
 
     }
+
+    // get users details
+    useEffect(() => {
+        axios.get("http://localhost:3000/users", {
+            headers: headers
+        })
+        .then(response => {
+            console.log(response.data);
+            setUsersDetails(response.data);
+        })
+    }, [])
 
     // get organisations details
     useEffect(() => {
@@ -81,7 +109,6 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             headers: headers
         })
         .then(response => {
-            console.log(response.data);
             setOrganisationDetails(response.data);
         })
     }, [])
@@ -93,8 +120,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         })
         .then(response => {
             console.log(response.data);
-            setShifts(response.data);
-            setStartDate(response.data.start);
+            setShifts(response.data);  
         })
     }, [])
 
@@ -102,9 +128,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         <>
             <NavBar name={name}>{sessionId}</NavBar> 
 
-            {/* {organisations.filter(organisation => organisation.id === organisationId).map(filteredName => (
-                <h2>{filteredName.name}</h2>
-                ))} */}
+
             <h2>{organisationName}</h2>
 
             <h4>Shifts</h4>
@@ -125,19 +149,10 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
                         <tbody>
                             {renderTableData()}
                         </tbody>
-
-                        
-                        {/* <tr>
-                            {shifts.map((shift, key)=> (<td key={key}>{shift.userId}</td>))}
-                            {shifts.map((shift, key)=> (<td key={key}>{formatDate(startDate)}</td>))}
-                            {shifts.map((shift, key)=> (<td key={key}>{shift.start}</td>))}
-                            {shifts.map((shift, key)=> (<td key={key}>{shift.finish}</td>))}
-                            {shifts.map((shift, key)=> (<td key={key}>{shift.breakLength}</td>))}
-                        </tr> */}
                     
                         <tr>
                             <td>{name}</td>
-                            <td><input type="datetime- local" className="input" name="shiftDate" value={shiftDate} onChange={e => setShiftDate(e.target.value)} required></input></td>
+                            <td><input type="date" className="input" name="shiftDate" value={shiftDate} onChange={e => setShiftDate(e.target.value)} required></input></td>
                             <td><input type="time" className="input" name="startTime" value={startTime} onChange={e => setStartTime(e.target.value)} required></input></td>
                             <td><input type="time" className="input" name="finishTime" value={finishTime} onChange={e => setFinishTime(e.target.value)} required></input></td>
                             <td><input type="number" className="input" name="breakLength" value={breakLength} onChange={e => setBreakLength(e.target.value)} ></input></td>

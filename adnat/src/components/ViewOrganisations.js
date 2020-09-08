@@ -62,7 +62,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
 
     return ( 
     <>
-        <NavBar name={name}/>
+        <NavBar name={name}>{sessionId}</NavBar>
 
         <p>You aren't a member of any organisations.</p>
         <p>Join an existing one or create a new one.</p><br/>

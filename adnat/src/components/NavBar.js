@@ -6,15 +6,14 @@ import axios from 'axios';
 const NavBar = ({ name, sessionId }) => {
 
     const history = useHistory();
-    
-    // const headers = {
-    //     "Authorization": sessionId,
-    //     "Content-Type": "application/json"
-    // }
 
-    const logout = () => {
-        //event.preventDefault();
-        axios.delete('http://localhost:3000/auth/logout', {
+    const logout = (sessionId) => {
+        console.log(sessionId);
+        axios.delete("http://localhost:3000/auth/logout", {
+            headers: {
+                "Authorization": sessionId,
+                "Content-Type": "application/json"
+            }
         })
         .then(response => {
             console.log(response);
