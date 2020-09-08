@@ -22,20 +22,16 @@ const ViewOrganisation = ({ name, sessionId, organisationId }) => {
             headers: headers
         })
         .then(response => {
-            console.log(response.data);
-            // setOrganisationId(response.data);
             history.push("/view-organisations");
         })
     }
 
     // gets all organisations
     useEffect(() => {
-        // console.log(organisations);
         axios.get("http://localhost:3000/organisations", {
             headers: headers
         })
         .then(response => {
-            // console.log(response.data);
             setOrganisations(response.data);
         })
     }, [])

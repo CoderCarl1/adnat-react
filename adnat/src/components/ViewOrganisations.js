@@ -6,11 +6,8 @@ import axios from "axios";
 // When new member signs up they're redirected to this screen and prompted to join an organisation
 const ViewOrganisations = ({ name, sessionId }) => {
     const [organisations, setOrganisations] = useState([]);
-    // const [createAndJoin, setCreateAndJoin] = useState("");
     const [organisationName, setName] = useState("");
     const [hourlyRate, setHourlyRate] = useState("");
-    // const [joinOrganisation, setJoinOrganisation] = useState("");
-    // const [organisationId, setOrganisationId] = useState("");
     const history = useHistory();    
 
     const headers = {
@@ -18,19 +15,14 @@ const ViewOrganisations = ({ name, sessionId }) => {
         "Content-Type": "application/json"
     }
 
-    // (value={organisationId} onChange={e => setOrganisationId(e.target.value)})
-
     // joins an organisation 
     const joinOrganisation = (organisationId) => {
-        console.log(organisationId);
         axios.post("http://localhost:3000/organisations/join", {
             organisationId: organisationId,     
         }, {
             headers: headers
         })
         .then(response => {
-            console.log(response.data);
-            // setOrganisationId(response.data);
             history.push(`/view-organisation/${organisationId}`);
         })
     }

@@ -3,21 +3,18 @@ import { Link, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import axios from "axios";
 
-// This is used to edit an organisation's name and hourly update
+// This is used to edit an organisation's name and update hourly rate
 const EditOrganisation = ({ name, sessionId, organisationId }) => {
     
     const [organisationName, setOrganisationName] = useState("");
     const [hourlyRate, setHourlyRate] = useState("");
     const history = useHistory();
-    console.log(organisationName);
 
     const setOrganisationDetails = (organisations) => {
         let organisationData = organisations.filter(organisation => organisation.id === organisationId)
-        console.log(organisationData)
             setHourlyRate(organisationData[0].hourlyRate)
             setOrganisationName(organisationData[0].name)
     } 
-    
 
     const headers = {
         "Authorization": sessionId,
@@ -56,7 +53,6 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
             headers: headers
         })
         .then(response => {
-            console.log(response.data);
             setOrganisationDetails(response.data);
         })
     }, [])

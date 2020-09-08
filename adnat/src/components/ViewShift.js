@@ -34,7 +34,6 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
     function formatHoursWorked(startingTime, finishingTime, breakTime) {
         let convertedStartingTime = Math.floor(startingTime * 60);
         let convertedFinishingTime = Math.floor(finishingTime * 60);
-    
         return ((convertedFinishingTime - convertedStartingTime - breakTime)/60);
     }
     
@@ -57,6 +56,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
                     {/* <td>{setUsersDetails(userId)}</td> */}
                     <td>{userId}</td>
                     <td>{formatDate(start)}</td>
+                    {/* <td>{start.toLocaleDateString}</td> */}
                     <td>{start}</td>
                     <td>{finish}</td>
                     <td>{breakLength}</td>

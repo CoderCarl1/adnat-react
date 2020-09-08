@@ -23,7 +23,6 @@ const SignUp = ({ saveSessionId }) => {
             passwordConfirmation: passwordConfirmation,
         })
         .then(response => {
-            console.log(response);
             if (response.data.sessionId) {
                 saveSession(response.data.sessionId);
                 history.push("/view-organisations");
