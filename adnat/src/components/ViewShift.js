@@ -78,16 +78,16 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
     const createShift = event => {
         event.preventDefault();
         axios.post("http://localhost:3000/shifts", {
-            userId: userId,
-            start: startTime,
-            finish: finishTime,
+            userId: userId, 
+            start: JSON.stringify(`${shiftDate} ${startTime}`),
+            finish: JSON.stringify(`${shiftDate} ${finishTime}`),
             breakLength: breakLength,
         }, {
             headers: headers
         })
         .then(response => {
             console.log(response.data);
-            //history.push(`/view-shifts/${organisationId}`)
+            history.push(`/view-shifts/${organisationId}`)
         })
 
     }
