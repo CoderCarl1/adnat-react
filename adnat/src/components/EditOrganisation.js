@@ -16,8 +16,7 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
         console.log(organisationData)
             setHourlyRate(organisationData[0].hourlyRate)
             setOrganisationName(organisationData[0].name)
-        
-    }
+    } 
     
 
     const headers = {

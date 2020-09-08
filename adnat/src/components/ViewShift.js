@@ -7,6 +7,8 @@ import axios from 'axios';
 const ViewShift = ({ name, sessionId, organisationId, userId }) => {
 
     const history = useHistory();
+    const [organisationName, setOrganisationName] = useState("");
+    const [hourlyRate, setHourlyRate] = useState("");
 
     const headers = {
         "Authorization": sessionId,
@@ -39,6 +41,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             return (
                 <tr key={id}>
                     <td>{userId}</td>
+                    <td>{formatDate(startDate)}</td>
                     <td>{start}</td>
                     <td>{finish}</td>
                     <td>{breakLength}</td>
@@ -46,6 +49,13 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             )
         })
     }
+
+    const setOrganisationDetails = (organisations) => {
+        let organisationData = organisations.filter(organisation => organisation.id === organisationId)
+        console.log(organisationData)
+            setHourlyRate(organisationData[0].hourlyRate)
+            setOrganisationName(organisationData[0].name)
+    } 
 
     // create shift
     const createShift = event => {
@@ -64,6 +74,17 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         })
 
     }
+
+    // get organisations details
+    useEffect(() => {
+        axios.get("http://localhost:3000/organisations", {
+            headers: headers
+        })
+        .then(response => {
+            console.log(response.data);
+            setOrganisationDetails(response.data);
+        })
+    }, [])
 
     // gets all shifts
     useEffect(() => {
@@ -84,7 +105,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             {/* {organisations.filter(organisation => organisation.id === organisationId).map(filteredName => (
                 <h2>{filteredName.name}</h2>
                 ))} */}
-            <h2>ORGANISATIONS NAME</h2>
+            <h2>{organisationName}</h2>
 
             <h4>Shifts</h4>
 
@@ -115,7 +136,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
                         </tr> */}
                     
                         <tr>
-                            <td>Employees name to go here</td>
+                            <td>{name}</td>
                             <td><input type="datetime- local" className="input" name="shiftDate" value={shiftDate} onChange={e => setShiftDate(e.target.value)} required></input></td>
                             <td><input type="time" className="input" name="startTime" value={startTime} onChange={e => setStartTime(e.target.value)} required></input></td>
                             <td><input type="time" className="input" name="finishTime" value={finishTime} onChange={e => setFinishTime(e.target.value)} required></input></td>
