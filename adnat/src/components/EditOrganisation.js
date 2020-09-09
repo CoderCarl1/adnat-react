@@ -55,6 +55,7 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
         .then(response => {
             setOrganisationDetails(response.data);
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     return (

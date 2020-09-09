@@ -50,6 +50,7 @@ const ViewOrganisations = ({ name, sessionId }) => {
             console.log(response.data);
             setOrganisations(response.data);
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return ( 

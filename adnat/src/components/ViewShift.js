@@ -97,27 +97,20 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         .then(response => {
             setUsersDetails(response.data);
         })
-    }, [])
-
-    // get organisations details
-    useEffect(() => {
-        axios.get("http://localhost:3000/organisations", {
-            headers: headers
-        })
-        .then(response => {
-            setOrganisationDetails(response.data);
-        })
-    }, [])
-
-    // gets all shifts
-    useEffect(() => {
         axios.get("http://localhost:3000/shifts", {
             headers: headers
         })
         .then(response => {
             setShifts(response.data);  
         })
-    }, [])
+        axios.get("http://localhost:3000/organisations", {
+            headers: headers
+        })
+        .then(response => {
+            setOrganisationDetails(response.data);
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])        
 
     return (
         <>
