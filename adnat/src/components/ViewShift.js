@@ -24,40 +24,24 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
     const [shiftDate, setShiftDate] = useState("");
     const [startTime, setStartTime] = useState("");
 
-    // // format time
-    // function formatTime(time) {
-    //     return moment(time).format('hh:mm a')
-    //     {/* <td>{moment(finish).subtract(start)}</td> */}
-    // }
-
     //format hours worked
-    function formatHoursWorked(startingTime, finishingTime, breakTime) {
-        let convertedBreakTime = moment(breakTime).format('hh:mm a');
-        return convertedBreakTime;
-        // let convertedStartingTime = moment(startingTime).format('hh:mm a');
-        // let convertedFinishingTime = moment(finishingTime).format('hh:mm a');
-        // return convertedStartingTime;
-        // let convertedStartingTime = new moment(startingTime);
-        // let convertedFinishingTime = new moment(finishingTime);
-        // return moment.duration(convertedStartingTime.diff(convertedFinishingTime));
-        // let totalHoursWorked = moment(finishingTime).subtract(startingTime);
-        // return (totalHoursWorked - breakTime)/60;
-        // return moment(finishingTime).subtract(startingTime);
-        // let convertedFinishingTime = moment.duration(finishingTime).as('minutes');
-        // let convertedStartingTime = Math.floor(startingTime * 60);
-        // let convertedFinishingTime = Math.floor(finishingTime * 60);
-        // return (convertedFinishingTime - convertedStartingTime);
-        // return ((Math.floor(convertedFinishingTime * 60) - Math.floor(convertedStartingTime * 60) - breakTime)/60);
+    const formatHoursWorked = (startingTime, finishingTime, breakTime) => {
+        let convertedBreakTime = breakTime/60;
+        let convertedStartingTime = moment(startingTime);
+        let convertedFinishingTime = moment(finishingTime);
+        let duration = moment.duration(convertedFinishingTime.diff(convertedStartingTime));
+        let hours = duration.asHours();
+        return (hours - convertedBreakTime).toFixed(2);
     }
     
     // set all shifts
     const [shifts, setShifts] = useState([]);
     // const [usersDetails, setUsersDetails] = useState("");
+    const [userDetails, setUsersDetails] = useState([]);
 
-    const setUsersDetails = (users) => {
-        let userData = users.filter(user => user.id === userId)
-        console.log(userData)
-        setUsersName(userData[0].name)
+    const getUserName = (userDetails, userId) => {
+        let userData = userDetails.filter(user => user.id === userId);
+        return userData[0].name;
     }
 
     // rendering table displaying shifts
@@ -66,16 +50,13 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             const { id, userId, start, finish, breakLength} = shift
             return (
                 <tr key={id}>
-                    {/* <td>{setUsersDetails(userId)}</td> */}
-                    <td>{userId}</td>
+                    <td>{getUserName(userDetails, userId)}</td>
                     <td>{moment(start).format('DD/MM/YYYY')}</td>
                     <td>{moment(start).format('hh:mm a')}</td>
-                    {/* <td>{formatTime(start)}</td> */}
                     <td>{moment(finish).format('hh:mm a')}</td>
                     <td>{breakLength}</td>
                     <td>{formatHoursWorked(start, finish, breakLength)}</td>
-                    {/* <td>{moment(finish).subtract(start)}</td> */}
-                    <td></td>
+                    <td>{formatHoursWorked(start, finish, breakLength) * hourlyRate}</td>
                 </tr>
             )
         })
@@ -83,9 +64,8 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
 
     const setOrganisationDetails = (organisations) => {
         let organisationData = organisations.filter(organisation => organisation.id === organisationId)
-        console.log(organisationData)
-            setHourlyRate(organisationData[0].hourlyRate)
-            setOrganisationName(organisationData[0].name)
+        setHourlyRate(organisationData[0].hourlyRate)
+        setOrganisationName(organisationData[0].name)
     } 
 
     // create shift
@@ -104,15 +84,12 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             headers: headers
             })
             .then(response => {
-                console.log(response.data);
                 setShifts(response.data); 
                 setFinishTime("");
                 setBreakLength("");
                 setShiftDate("");
                 setStartTime("");
             })
-            // console.log(response.data);
-            // history.push(`/view-shifts/${organisationId}`)
         }, [])
 
     }
@@ -123,7 +100,6 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             headers: headers
         })
         .then(response => {
-            console.log(response.data);
             setUsersDetails(response.data);
         })
     }, [])
@@ -144,7 +120,6 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             headers: headers
         })
         .then(response => {
-            console.log(response.data);
             setShifts(response.data);  
         })
     }, [])
@@ -161,6 +136,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
             <form onSubmit={createShift}>
 
                 <table>
+                    <tbody>
                         <tr>
                             <th>Employee name</th>                          
                             <th>Shift date</th>
@@ -171,9 +147,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
                             <th>Shift cost</th>
                         </tr>     
 
-                        <tbody>
                             {renderTableData()}
-                        </tbody>
                     
                         <tr>
                             <td>{name}</td>
@@ -183,6 +157,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
                             <td><input type="number" className="input" name="breakLength" value={breakLength} onChange={e => setBreakLength(e.target.value)} ></input></td>
                             <td><input type="submit" value="Create Shift"></input></td>
                         </tr>
+                    </tbody>
                 </table>
             </form>           
         </>
