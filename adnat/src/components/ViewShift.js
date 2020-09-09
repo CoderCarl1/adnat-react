@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import axios from 'axios';
+import moment from 'moment';
 
 // Once a user joins an organisation they're redirected to this screen
 const ViewShift = ({ name, sessionId, organisationId, userId }) => {
@@ -23,18 +24,30 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
     const [shiftDate, setShiftDate] = useState("");
     const [startTime, setStartTime] = useState("");
 
-    // format date
-    const [startDate, setStartDate] = useState("");
-    function formatDate(fullDate) {
-        let options = { day: 'numeric', month: 'numeric', year: 'numeric'};
-        return new Date(fullDate).toLocaleDateString([],options);
-    }
+    // // format time
+    // function formatTime(time) {
+    //     return moment(time).format('hh:mm a')
+    //     {/* <td>{moment(finish).subtract(start)}</td> */}
+    // }
 
     //format hours worked
     function formatHoursWorked(startingTime, finishingTime, breakTime) {
-        let convertedStartingTime = Math.floor(startingTime * 60);
-        let convertedFinishingTime = Math.floor(finishingTime * 60);
-        return ((convertedFinishingTime - convertedStartingTime - breakTime)/60);
+        let convertedBreakTime = moment(breakTime).format('hh:mm a');
+        return convertedBreakTime;
+        // let convertedStartingTime = moment(startingTime).format('hh:mm a');
+        // let convertedFinishingTime = moment(finishingTime).format('hh:mm a');
+        // return convertedStartingTime;
+        // let convertedStartingTime = new moment(startingTime);
+        // let convertedFinishingTime = new moment(finishingTime);
+        // return moment.duration(convertedStartingTime.diff(convertedFinishingTime));
+        // let totalHoursWorked = moment(finishingTime).subtract(startingTime);
+        // return (totalHoursWorked - breakTime)/60;
+        // return moment(finishingTime).subtract(startingTime);
+        // let convertedFinishingTime = moment.duration(finishingTime).as('minutes');
+        // let convertedStartingTime = Math.floor(startingTime * 60);
+        // let convertedFinishingTime = Math.floor(finishingTime * 60);
+        // return (convertedFinishingTime - convertedStartingTime);
+        // return ((Math.floor(convertedFinishingTime * 60) - Math.floor(convertedStartingTime * 60) - breakTime)/60);
     }
     
     // set all shifts
@@ -47,7 +60,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         setUsersName(userData[0].name)
     }
 
-    // rendering table
+    // rendering table displaying shifts
     const renderTableData = () => {
         return shifts.map((shift, key) => {
             const { id, userId, start, finish, breakLength} = shift
@@ -55,12 +68,13 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
                 <tr key={id}>
                     {/* <td>{setUsersDetails(userId)}</td> */}
                     <td>{userId}</td>
-                    <td>{formatDate(start)}</td>
-                    {/* <td>{start.toLocaleDateString}</td> */}
-                    <td>{start}</td>
-                    <td>{finish}</td>
+                    <td>{moment(start).format('DD/MM/YYYY')}</td>
+                    <td>{moment(start).format('hh:mm a')}</td>
+                    {/* <td>{formatTime(start)}</td> */}
+                    <td>{moment(finish).format('hh:mm a')}</td>
                     <td>{breakLength}</td>
                     <td>{formatHoursWorked(start, finish, breakLength)}</td>
+                    {/* <td>{moment(finish).subtract(start)}</td> */}
                     <td></td>
                 </tr>
             )
@@ -79,16 +93,27 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         event.preventDefault();
         axios.post("http://localhost:3000/shifts", {
             userId: userId, 
-            start: JSON.stringify(`${shiftDate} ${startTime}`),
-            finish: JSON.stringify(`${shiftDate} ${finishTime}`),
+            start: (`${shiftDate} ${startTime}`),
+            finish: (`${shiftDate} ${finishTime}`),
             breakLength: breakLength,
         }, {
             headers: headers
         })
         .then(response => {
-            console.log(response.data);
-            history.push(`/view-shifts/${organisationId}`)
-        })
+            axios.get("http://localhost:3000/shifts", {
+            headers: headers
+            })
+            .then(response => {
+                console.log(response.data);
+                setShifts(response.data); 
+                setFinishTime("");
+                setBreakLength("");
+                setShiftDate("");
+                setStartTime("");
+            })
+            // console.log(response.data);
+            // history.push(`/view-shifts/${organisationId}`)
+        }, [])
 
     }
 
