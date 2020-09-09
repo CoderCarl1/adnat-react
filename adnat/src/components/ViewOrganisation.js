@@ -38,7 +38,7 @@ const ViewOrganisation = ({ name, sessionId, organisationId }) => {
 
     return (
         <>
-            <NavBar name={name}>{sessionId}</NavBar>
+            <NavBar name={name} sessionId={sessionId}></NavBar>
 
             {organisations.filter(organisation => organisation.id === organisationId).map(filteredName => (
                 <h2>{filteredName.name}</h2>

@@ -8,6 +8,7 @@ const NavBar = ({ name, sessionId }) => {
     const history = useHistory();
 
     const logout = () => {
+        console.log(sessionId);
         axios.delete("http://localhost:3000/auth/logout", {
             headers: {
                 "Authorization": sessionId,

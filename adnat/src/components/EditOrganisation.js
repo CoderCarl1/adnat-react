@@ -59,7 +59,7 @@ const EditOrganisation = ({ name, sessionId, organisationId }) => {
     
     return (
     <>
-        <NavBar name={name}>{sessionId}</NavBar> 
+        <NavBar name={name} sessionId={sessionId}></NavBar> 
 
         <h2>Edit Organisation</h2>
         <form onSubmit={updateOrganisation}>

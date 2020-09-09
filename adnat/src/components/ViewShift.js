@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+// import { Link, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import axios from 'axios';
 import moment from 'moment';
@@ -7,12 +7,12 @@ import moment from 'moment';
 // Once a user joins an organisation they're redirected to this screen
 const ViewShift = ({ name, sessionId, organisationId, userId }) => {
 
-    const history = useHistory();
     const [organisationName, setOrganisationName] = useState("");
-    const [userName, setUsersName] = useState("");
+    // const [userName, setUsersName] = useState("");
     const [hourlyRate, setHourlyRate] = useState("");
+    const [shifts, setShifts] = useState([]);
+    const [userDetails, setUsersDetails] = useState([]);
     
-
     const headers = {
         "Authorization": sessionId,
         "Content-Type": "application/json"
@@ -33,11 +33,6 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
         let hours = duration.asHours();
         return (hours - convertedBreakTime).toFixed(2);
     }
-    
-    // set all shifts
-    const [shifts, setShifts] = useState([]);
-    // const [usersDetails, setUsersDetails] = useState("");
-    const [userDetails, setUsersDetails] = useState([]);
 
     const getUserName = (userDetails, userId) => {
         let userData = userDetails.filter(user => user.id === userId);
@@ -126,7 +121,7 @@ const ViewShift = ({ name, sessionId, organisationId, userId }) => {
 
     return (
         <>
-            <NavBar name={name}>{sessionId}</NavBar> 
+            <NavBar name={name} sessionId={sessionId}></NavBar>
 
 
             <h2>{organisationName}</h2>
